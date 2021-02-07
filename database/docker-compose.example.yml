@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  gamify_db:
+    image: "postgres:10"
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "gamify"
+    container_name: "gamify"
+    ports:
+      - "5432:5432"
