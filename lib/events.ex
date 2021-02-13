@@ -1,5 +1,7 @@
   defmodule GamifyBot.Events do
     use Alchemy.Events
+    import Ecto.Query
+    alias GamifyBot.Accounts
 
     Events.on_message(:inspect)
     def inspect(message) do
@@ -23,7 +25,8 @@
     def chore_command(message, [command | rest]) do
       case command do
         "done" ->
-          message_back(message, "Saving chore with: #{Enum.join(rest, ", ")}")
+          save_chore(message, rest)
+          message_back(message, "Saved chore with: #{Enum.join(rest, ", ")}")
         _ -> unknown_command(message)
       end
     end
@@ -45,5 +48,9 @@
       GamifyBot.Commands.message(%{
         channel_id: message.channel_id
       }, content)
+    end
+
+    def save_chore(message, attrs) do
+      {:ok, user} = Accounts.get_or_create_user(%{name: message.author.username})
     end
   end
