@@ -1,8 +1,7 @@
   defmodule GamifyBot.Events do
     use Alchemy.Events
-    import Ecto.Query
-    alias GamifyBot.Accounts
     alias GamifyBot.Tasks
+    alias GamifyBot.Accounts
 
     Events.on_message(:inspect)
     def inspect(message) do
@@ -34,7 +33,7 @@
 
     def chore_command(message, []), do: unknown_command(message)
 
-    def unknown_command(message) do
+    def unknown_command(_) do
       IO.puts "Unknown message received"
     end
 
@@ -52,7 +51,7 @@
       {:ok, user} = Accounts.get_or_create_user(%{name: message.author.username})
 
       [name, duration] = attrs
-      {:ok, chore} = Tasks.create_chore(%{
+      Tasks.create_chore(%{
         user: user.id,
         name: name,
         duration: duration

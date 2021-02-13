@@ -2,7 +2,6 @@ defmodule GamifyBot.Tasks.Chore do
   use Ecto.Schema
   import Ecto.Changeset
   alias GamifyBot.Accounts.User
-  alias GamifyBot.Repo
 
   schema "chores" do
     field :name, :string

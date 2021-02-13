@@ -31,3 +31,4 @@ gamify_bot-*.tar
 database/docker-compose.yml
 
 config/dev.exs
+config/test.exs

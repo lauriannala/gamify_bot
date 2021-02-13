@@ -5,7 +5,7 @@ defmodule GamifyBot.MixProject do
     [
       app: :gamify_bot,
       version: "0.1.0",
-      elixir: "~> 1.11",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -13,7 +13,7 @@ defmodule GamifyBot.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
-    [mod: {GamifyBot, []}]
+    [mod: {GamifyBot.Application, []}]
   end
 
   # Run "mix help deps" to learn about dependencies.
