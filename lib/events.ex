@@ -2,6 +2,7 @@
     use Alchemy.Events
     import Ecto.Query
     alias GamifyBot.Accounts
+    alias GamifyBot.Tasks
 
     Events.on_message(:inspect)
     def inspect(message) do
@@ -52,5 +53,12 @@
 
     def save_chore(message, attrs) do
       {:ok, user} = Accounts.get_or_create_user(%{name: message.author.username})
+
+      [name, duration] = attrs
+      {:ok, chore} = Tasks.create_chore(%{
+        user: user.id,
+        name: name,
+        duration: duration
+      }, user)
     end
   end
