@@ -29,3 +29,5 @@ gamify_bot-*.tar
 **/*.swp
 
 database/docker-compose.yml
+
+config/dev.exs
