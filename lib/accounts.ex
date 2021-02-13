@@ -9,9 +9,10 @@ defmodule GamifyBot.Accounts do
   end
 
   def get_or_create_user(%{name: name} = attrs) do
-    case Repo.get_by(User, name: name) do
-      user -> {:ok, user}
-      nil -> create_user(attrs)
+    if found_user = Repo.get_by(User, %{name: name}) do
+      {:ok, found_user}
+    else
+      create_user(attrs)
     end
   end
 end

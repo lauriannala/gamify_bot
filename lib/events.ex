@@ -9,7 +9,6 @@
       IO.inspect message
 
       case message.author.username do
-        "gamify_bot" -> IO.puts "Message received, but I should probably not talk to myself."
         _ -> message_command(message)
       end
     end
@@ -18,6 +17,7 @@
       commands = String.split(message.content, " ")
       case commands do
         ["chore" | rest] -> chore_command(message, rest)
+        ["Chore" | rest] -> chore_command(message, rest)
         ["gamify_bot" | ["help" | _]] -> help_message(message)
         _ -> unknown_command(message)
       end
@@ -35,10 +35,7 @@
     def chore_command(message, []), do: unknown_command(message)
 
     def unknown_command(message) do
-      IO.puts "Unknown message received, responding.."
-      message_back(
-        message,
-        "Hello there, #{message.author.username}! Sorry, but I don't understand what you mean by saying: #{message.content}, for help, type: gamify_bot help")
+      IO.puts "Unknown message received"
     end
 
     def help_message(message) do
